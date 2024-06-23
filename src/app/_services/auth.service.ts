@@ -7,14 +7,14 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-const AUTH_API = 'http://localhost:8080/api/auth/';
+const AUTH_API = 'https://livredecaisseserverside-a315e713e62c.herokuapp.com/api/auth/';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:8080/api/auth';
+  private apiUrl = 'https://livredecaisseserverside-a315e713e62c.herokuapp.com/api/auth';
   constructor(private http: HttpClient) {}
 
   login(username: string, password: string): Observable<any> {

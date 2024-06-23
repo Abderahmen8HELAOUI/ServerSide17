@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
 })
 export class TutorialService {
 
-  private baseUrl = 'http://localhost:8080/api';
+  private baseUrl = 'https://livredecaisseserverside-a315e713e62c.herokuapp.com/api';
   constructor(private http: HttpClient, private router: Router) {}
 
   getAll(params: any): Observable<any> {

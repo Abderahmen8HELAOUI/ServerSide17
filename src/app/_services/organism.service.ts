@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
 })
 export class OrganismService {
 
-  private baseUrl = 'http://localhost:8080/api/organisms';
+  private baseUrl = 'https://livredecaisseserverside-a315e713e62c.herokuapp.com/api/organisms';
 
   constructor(private http: HttpClient) { }
 
