@@ -1,0 +1,41 @@
+<div class="container">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" formControlName="username" class="form-control" id="username">
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" formControlName="email" class="form-control" id="email">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" formControlName="password" class="form-control" id="password">
+    </div>
+    <div class="form-group">
+      <label for="uniqueIdentifier">Unique Identifier</label>
+      <input type="text" formControlName="uniqueIdentifier" class="form-control" id="uniqueIdentifier">
+    </div>
+    <div>
+      <label for="organismId">Organism</label>
+      <select formControlName="organismId" id="organismId">
+        <option *ngFor="let organism of organisms" [value]="organism.id">{{ organism.type }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="role">Roles</label>
+      <select formControlName="role" class="form-control" id="role" multiple>
+        <option value="user">User</option>
+        <option value="admin">Admin</option>
+        <option value="mod">Moderator</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Sign Up</button>
+  </form>
+  <div *ngIf="isSuccessful" class="alert alert-success">
+    Registration successful!
+  </div>
+  <div *ngIf="isSignUpFailed" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+</div>

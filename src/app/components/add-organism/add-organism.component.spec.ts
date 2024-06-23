@@ -1,0 +1,23 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { AddOrganismComponent } from './add-organism.component';
+
+describe('AddOrganismComponent', () => {
+  let component: AddOrganismComponent;
+  let fixture: ComponentFixture<AddOrganismComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [AddOrganismComponent]
+    })
+    .compileComponents();
+    
+    fixture = TestBed.createComponent(AddOrganismComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

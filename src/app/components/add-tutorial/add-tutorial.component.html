@@ -1,0 +1,191 @@
+<div>
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+        <label for="title">Date Opération Comptale</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          required
+          [(ngModel)]="tutorial.title"
+          name="title"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="recipeToday">Recette Courante</label>
+        <input
+          type="text"
+          class="form-control"
+          id="recipeToday"
+          required
+          [(ngModel)]="tutorial.recipeToday"
+          name="recipeToday"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="balancePreviousMonth">Solde Mois Précedent</label>
+        <input
+          type="number"
+          class="form-control"
+          id="balancePreviousMonth"
+          required
+          [(ngModel)]="tutorial.balancePreviousMonth"
+          name="balancePreviousMonth"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="operationTreasuryAnterior">Opération Trésor Précédent</label>
+        <input
+          type="number"
+          class="form-control"
+          id="operationTreasuryAnterior"
+          required
+          [(ngModel)]="tutorial.operationTreasuryAnterior"
+          name="operationTreasuryAnterior"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="operationTreasuryToday">Opération Trésor Courante</label>
+        <input
+          type="number"
+          class="form-control"
+          id="operationTreasuryToday"
+          required
+          [(ngModel)]="tutorial.operationTreasuryToday"
+          name="operationTreasuryToday"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="operationPreviousRegulation">Opération Régulation Précédente</label>
+        <input
+          type="number"
+          class="form-control"
+          id="operationPreviousRegulation"
+          required
+          [(ngModel)]="tutorial.operationPreviousRegulation"
+          name="operationPreviousRegulation"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="operationRegulationToday">Opération Régulation Courante</label>
+        <input
+          type="number"
+          class="form-control"
+          id="operationRegulationToday"
+          required
+          [(ngModel)]="tutorial.operationRegulationToday"
+          name="operationRegulationToday"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="postCurrentAccount">CCP</label>
+        <input
+          type="number"
+          class="form-control"
+          id="postCurrentAccount"
+          required
+          [(ngModel)]="tutorial.postCurrentAccount"
+          name="postCurrentAccount"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="creditExpected">Crédit Attendu</label>
+        <input
+          type="number"
+          class="form-control"
+          id="creditExpected"
+          required
+          [(ngModel)]="tutorial.creditExpected"
+          name="creditExpected"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="rateExpected">Débit Attendu</label>
+        <input
+          type="number"
+          class="form-control"
+          id="rateExpected"
+          required
+          [(ngModel)]="tutorial.rateExpected"
+          name="rateExpected"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="otherValues">Autres Valeurs</label>
+        <input
+          type="number"
+          class="form-control"
+          id="otherValues"
+          required
+          [(ngModel)]="tutorial.otherValues"
+          name="otherValues"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="statesRepartition">États de Répartition</label>
+        <input
+          type="number"
+          class="form-control"
+          id="statesRepartition"
+          required
+          [(ngModel)]="tutorial.statesRepartition"
+          name="statesRepartition"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="moneySpecies">Total Numéraire</label>
+        <input
+          type="number"
+          class="form-control"
+          id="moneySpecies"
+          required
+          [(ngModel)]="tutorial.moneySpecies"
+          name="moneySpecies"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="organismId">Code Organism</label>
+        <input
+          type="number"
+          class="form-control"
+          id="organismId"
+          required
+          [(ngModel)]="tutorial.organismId"
+          name="organismId"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Déscription</label>
+        <input
+          class="form-control"
+          id="description"
+          required
+          [(ngModel)]="tutorial.description"
+          name="description"
+        />
+      </div>
+
+      <button (click)="saveTutorial()" class="btn btn-success">Soumettre</button>
+    </div>
+    <div *ngIf="submitted">
+      <h4>Opération Comptable Soumise avec Succés!</h4>
+      <button class="btn btn-success" (click)="newTutorial()">Add</button>
+    </div>
+  </div>
+</div>
+
