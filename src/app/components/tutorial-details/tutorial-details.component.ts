@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Tutorial} from "../../models/tutorial";
 import {TutorialService} from "../../_services/tutorial.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-tutorial-details',
@@ -42,8 +43,11 @@ export class TutorialDetailsComponent implements OnInit {
     moneySpecies: 0,
 
     moneyOnCashier: 0,
+    providedMoneyOnCashier: 0,
+    surplus: 0,
+    deficit: 0,
 
-    organismId: '',
+    organismCode: '',
     description: '',
     published: false
   };
@@ -63,7 +67,8 @@ export class TutorialDetailsComponent implements OnInit {
   constructor(
       private tutorialService: TutorialService,
       private route: ActivatedRoute,
-      private router: Router
+      private router: Router,
+      private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -119,16 +124,13 @@ export class TutorialDetailsComponent implements OnInit {
   }
 
   updateTutorial(): void {
-    this.message = '';
-
+    if (confirm('Are you sure to update this record?'))
     this.tutorialService
         .update(this.currentTutorial.id, this.currentTutorial)
         .subscribe({
           next: (res) => {
             console.log(res);
-            this.message = res.message
-                ? res.message
-                : 'This tutorial was updated successfully!';
+            this.toastr.info('Updated successfully', 'Application Livre de Caisse')
             this.router.navigate(['/tutorials']).then(r => {
               console.log('Navigation successful:', r);
             });
@@ -139,9 +141,11 @@ export class TutorialDetailsComponent implements OnInit {
   }
 
   deleteTutorial(): void {
+    if (confirm('Are you sure to delete this record?'))
     this.tutorialService.delete(this.currentTutorial.id).subscribe({
       next: (res) => {
         console.log(res);
+        this.toastr.error('Deleted successfully', 'Application Livre de Caisse')
         this.router.navigate(['/tutorials']).then(r => {
           console.log('Navigation successful:', r);
         });

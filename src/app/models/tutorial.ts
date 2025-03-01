@@ -17,7 +17,7 @@ export interface Tutorial {
   operationRegulationToday?: number;
   operationTreasuryAnterior?: number;
   operationTreasuryToday?: number;
-  organismId?: string,
+  organismCode?: string;
   otherValues?: number;
   postCurrentAccount?: number;
   published?: boolean;
@@ -30,4 +30,7 @@ export interface Tutorial {
   totalOperationRegulation?: number;
   totalOperationTreasury?: number;
   totalRecipeToday?: number;
+  providedMoneyOnCashier?: number;
+  surplus?: number;
+  deficit?: number;
 }

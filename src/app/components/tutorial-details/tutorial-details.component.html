@@ -1,4 +1,4 @@
-<div *ngIf="viewMode; else editable">
+<div *ngIf="viewMode; else editable" class="col-md-25">
     <div *ngIf="currentTutorial.id">
         <h4>Opération Comptable</h4>
         <div>
@@ -7,12 +7,12 @@
         </div>
         <div>
             <label><strong>Recette Aujourd'hui:</strong></label>
-            {{ currentTutorial.recipeToday }}
+            {{ currentTutorial.recipeToday |  currency:"دت ":"symbol":'6.3-3'}}
         </div>
 
         <div>
             <label><strong>Solde mois Précédent:</strong></label>
-            {{ currentTutorial.balancePreviousMonth }}
+            {{ currentTutorial.balancePreviousMonth |  currency:"دت ":"symbol":'6.3-3'}}
         </div>
 
         <div>
@@ -22,11 +22,11 @@
 
         <div>
             <label><strong>Operation du Trésor Précédente:</strong></label>
-            {{ currentTutorial.operationTreasuryAnterior }}
+            {{ currentTutorial.operationTreasuryAnterior |  currency:"دت ":"symbol":'6.3-3'}}
         </div>
         <div>
             <label><strong>Opération du Trésor Courante:</strong></label>
-            {{ currentTutorial.operationTreasuryToday }}
+            {{ currentTutorial.operationTreasuryToday |  currency:"دت ":"symbol":'6.3-3'}}
         </div>
         <div>
             <label><strong>Total Opérations du Trésor:</strong></label>
@@ -35,11 +35,11 @@
 
         <div>
             <label><strong>Operation de Regulation Précédente:</strong></label>
-            {{ currentTutorial.operationPreviousRegulation }}
+            {{ currentTutorial.operationPreviousRegulation |  currency:"دت ":"symbol":'6.3-3'}}
         </div>
         <div>
             <label><strong>Operation de Regulation Courante:</strong></label>
-            {{ currentTutorial.operationRegulationToday }}
+            {{ currentTutorial.operationRegulationToday |  currency:"دت ":"symbol":'6.3-3'}}
         </div>
         <div>
             <label><strong>Total Opérations de Régulation :</strong></label>
@@ -58,15 +58,15 @@
 
         <div>
             <label><strong>Compte Courant Postal:</strong></label>
-            {{ currentTutorial.postCurrentAccount }}
+            {{ currentTutorial.postCurrentAccount |  currency:"دت ":"symbol":'6.3-3'}}
         </div>
         <div>
             <label><strong>Crédit Attendu:</strong></label>
-            {{ currentTutorial.creditExpected }}
+            {{ currentTutorial.creditExpected |  currency:"دت ":"symbol":'6.3-3'}}
         </div>
         <div>
             <label><strong>Débit Attendu:</strong></label>
-            {{ currentTutorial.rateExpected }}
+            {{ currentTutorial.rateExpected |  currency:"دت ":"symbol":'6.3-3'}}
         </div>
 
         <div>
@@ -76,11 +76,11 @@
 
         <div>
             <label><strong>Autres Valeurs:</strong></label>
-            {{ currentTutorial.otherValues }}
+            {{ currentTutorial.otherValues |  currency:"دت ":"symbol":'6.3-3'}}
         </div>
         <div>
             <label><strong>États de Répartition:</strong></label>
-            {{ currentTutorial.statesRepartition }}
+            {{ currentTutorial.statesRepartition |  currency:"دت ":"symbol":'6.3-3'}}
         </div>
 
         <div>
@@ -90,7 +90,7 @@
 
         <div>
             <label><strong>Argents en Espèce:</strong></label>
-            {{ currentTutorial.moneySpecies }}
+            {{ currentTutorial.moneySpecies |  currency:"دت ":"symbol":'6.3-3'}}
         </div>
 
         <div>
@@ -100,7 +100,7 @@
 
         <div>
             <label><strong>Code Organism:</strong></label>
-            {{ currentTutorial.organismId }}
+            {{ currentTutorial.organismCode }}
         </div>
 
         <div>
@@ -254,12 +254,12 @@
                 />
             </div>
             <div class="form-group">
-                <label for="organismId">organismId</label>
+                <label for="organismId">Organism Code</label>
                 <input
                         type="text"
                         class="form-control"
                         id="organismId"
-                        [(ngModel)]="currentTutorial.organismId"
+                        [(ngModel)]="currentTutorial.organismCode"
                         name="organismId"
                 />
             </div>

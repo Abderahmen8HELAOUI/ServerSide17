@@ -32,7 +32,8 @@
           class="form-control"
           id="balancePreviousMonth"
           required
-          [(ngModel)]="tutorial.balancePreviousMonth"
+          [(ngModel)]="tutorial.balancePreviousMonth "
+
           name="balancePreviousMonth"
         />
       </div>
@@ -100,6 +101,7 @@
       <div class="form-group">
         <label for="creditExpected">Crédit Attendu</label>
         <input
+          style="color: green"
           type="number"
           class="form-control"
           id="creditExpected"
@@ -112,6 +114,7 @@
       <div class="form-group">
         <label for="rateExpected">Débit Attendu</label>
         <input
+          style="color: red"
           type="number"
           class="form-control"
           id="rateExpected"
@@ -164,7 +167,7 @@
           class="form-control"
           id="organismId"
           required
-          [(ngModel)]="tutorial.organismId"
+          [(ngModel)]="tutorial.organismCode"
           name="organismId"
         />
       </div>

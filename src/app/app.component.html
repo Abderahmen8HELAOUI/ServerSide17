@@ -1,12 +1,16 @@
 <div id="app">
   <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">bezKoder</a>
+    <a href="#" class="navbar-brand">Application Livre de Caisse</a>
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
       <li class="nav-item">
         <a href="/home" class="nav-link" routerLink="home">Home </a>
       </li>
       <li class="nav-item" *ngIf="showAdminBoard">
-        <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
+        <div class="d-flex">
+          <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
+          <a href="/create-organism" class="nav-link" routerLink="create-organism">create Organism</a>
+        </div>
+
       </li>
       <li class="nav-item" *ngIf="showModeratorBoard">
         <div class="d-flex">

@@ -7,6 +7,7 @@ import {RegisterComponent} from "./register/register.component";
 import {AddTutorialComponent} from "./components/add-tutorial/add-tutorial.component";
 import {TutorialsListComponent} from "./components/tutorials-list/tutorials-list.component";
 import {TutorialDetailsComponent} from "./components/tutorial-details/tutorial-details.component";
+import {OrganismCreateComponent} from "./organism-create/organism-create.component";
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'create-tutorial', component: AddTutorialComponent },
   { path: 'tutorials/:id', component: TutorialDetailsComponent },
   { path: 'tutorials', component: TutorialsListComponent },
+  { path: 'create-organism', component: OrganismCreateComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

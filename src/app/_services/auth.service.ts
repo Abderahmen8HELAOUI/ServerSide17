@@ -1,25 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {environment} from "../../environments/environment";
 
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-const AUTH_API = 'https://livredecaisseserverside-a315e713e62c.herokuapp.com/api/auth/';
-
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
 
-  private apiUrl = 'https://livredecaisseserverside-a315e713e62c.herokuapp.com/api/auth';
+  private baseUrl = environment.baseUrl;
   constructor(private http: HttpClient) {}
 
   login(username: string, password: string): Observable<any> {
     return this.http.post(
-      AUTH_API + 'signin',
+      this.baseUrl + '/auth/signin',
       {
         username,
         password,
@@ -30,7 +29,7 @@ export class AuthService {
 
   register(username: string, email: string, password: string): Observable<any> {
     return this.http.post(
-      AUTH_API + 'signup',
+      this.baseUrl + '/auth/signup',
       {
         username,
         email,
@@ -41,12 +40,12 @@ export class AuthService {
   }
 
   registerUser(organismId: string, signupRequest: any): Observable<any> {
-    return this.http.post(AUTH_API + 'signup/' + organismId + '/organism', signupRequest, {
+    return this.http.post(this.baseUrl + '/auth/signup/' + organismId + '/organism', signupRequest, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     });
   }
 
   logout(): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/signout`, {}, { withCredentials: true });
+    return this.http.post<any>(`${this.baseUrl}/signout`, {}, { withCredentials: true });
   }
 }

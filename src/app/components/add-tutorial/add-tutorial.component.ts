@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {TutorialService} from "../../_services/tutorial.service";
 import {OrganismService} from "../../_services/organism.service";
 import {StorageService} from "../../_services/storage.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-add-tutorial',
@@ -30,13 +31,16 @@ export class AddTutorialComponent implements OnInit {
     published: false
   };
   submitted = false;
-  organismCode!: string;
+  organismCode: string;
 
   constructor(
     private tutorialService: TutorialService,
     private router: Router,
-    private storageService: StorageService
-  ) {}
+    private storageService: StorageService,
+    private toastr: ToastrService
+  ) {
+    this.organismCode = this.storageService.getOrganismCode() || '';
+  }
 
   ngOnInit(): void {
       this.organismCode = this.storageService.getOrganismCode() || '';
@@ -75,12 +79,33 @@ export class AddTutorialComponent implements OnInit {
         }
     );
 
-    this.tutorialService.getStatesRepartitionLastRowLastRow().subscribe(
+    this.tutorialService.getStatesRepartitionLastRowLastRowByOrganismCode(this.organismCode).subscribe(
         res => {
           this.tutorial.statesRepartition = res;
           console.log(res);
         }
     );
+
+    this.tutorialService.getCreditExpectedLastRowLastRow().subscribe(
+      res => {
+        this.tutorial.creditExpected = res;
+        console.log(res);
+      }
+    );
+
+    this.tutorialService.getExpectedFlowLastRow().subscribe(
+      res => {
+        this.tutorial.rateExpected = res;
+        console.log(res);
+      }
+    );
+  }
+
+  updateBalancePreviousMonth(value: string): void {
+    const numericValue = parseFloat(value);
+    if (!isNaN(numericValue)) {
+      this.tutorial.balancePreviousMonth = parseFloat(numericValue.toFixed(3));
+    }
   }
 
   saveTutorial(): void {
@@ -104,11 +129,12 @@ export class AddTutorialComponent implements OnInit {
       moneySpecies: this.tutorial.moneySpecies,
       description: this.tutorial.description
     };
-
+    if (confirm('Are you sure to add this record?'))
     this.tutorialService.createTutorialByOrganismCode(this.organismCode, data).subscribe({
       next: (res) => {
         console.log(res);
         this.submitted = true;
+        this.toastr.success('Inserted successfully', 'Application Livre de Caisse')
         this.router.navigate(['/tutorials']);
       },
       error: (e) => console.error(e)

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="card card-container">
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="username">Username</label>
@@ -19,15 +19,15 @@
     <div>
       <label for="organismId">Organism</label>
       <select formControlName="organismId" id="organismId">
-        <option *ngFor="let organism of organisms" [value]="organism.id">{{ organism.type }}</option>
+        <option *ngFor="let organism of organisms" [value]="organism.id">{{ organism.name }}</option>
       </select>
     </div>
     <div class="form-group">
       <label for="role">Roles</label>
       <select formControlName="role" class="form-control" id="role" multiple>
         <option value="user">User</option>
-        <option value="admin">Admin</option>
-        <option value="mod">Moderator</option>
+        <!-- <option value="admin">Admin</option>
+        <option value="mod">Moderator</option> -->
       </select>
     </div>
     <button type="submit" class="btn btn-primary">Sign Up</button>

@@ -3,13 +3,14 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Tutorial} from "../models/tutorial";
 import {Router} from "@angular/router";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TutorialService {
+  private baseUrl = environment.baseUrl;
 
-  private baseUrl = 'https://livredecaisseserverside-a315e713e62c.herokuapp.com/api';
   constructor(private http: HttpClient, private router: Router) {}
 
   getAll(params: any): Observable<any> {
@@ -56,40 +57,40 @@ export class TutorialService {
   }
 
   getTotalRecipe(): Observable<number> {
-    return this.http.get<number>(`${this.baseUrl}/totalRecipe`);
+    return this.http.get<number>(`${this.baseUrl}/tutorials/totalRecipe`);
   }
 
   getTotalRecipeByDate(titleDate: string): Observable<number> {
     const params = new HttpParams().set('titleDate', titleDate);
-    return this.http.get<number>(`${this.baseUrl}/totalRecipeWithOrWithoutDate`, { params });
+    return this.http.get<number>(`${this.baseUrl}/tutorials/totalRecipeWithOrWithoutDate`, { params });
   }
 
   getTotalTreasuryOperations(): Observable<number> {
-    return this.http.get<number>(`${this.baseUrl}/totalTreasuryOperations`);
+    return this.http.get<number>(`${this.baseUrl}/tutorials/totalTreasuryOperations`);
   };
 
   getTotalRegulationOperations(): Observable<number> {
-    return this.http.get<number>(`${this.baseUrl}/totalRegulationOperation`);
+    return this.http.get<number>(`${this.baseUrl}/tutorials/totalRegulationOperation`);
   };
 
   getTotalExpenses(): Observable<number> {
-    return this.http.get<number>(`${this.baseUrl}/totalExpenses`);
+    return this.http.get<number>(`${this.baseUrl}/tutorials/totalExpenses`);
   };
 
   getCurrentBalanceToday(): Observable<number> {
-    return this.http.get<number>(`${this.baseUrl}/totalCurrentBalanceToday`);
+    return this.http.get<number>(`${this.baseUrl}/tutorials/totalCurrentBalanceToday`);
   }
 
   getFinalPostalCurrentAccount(): Observable<number> {
-    return this.http.get<number>(`${this.baseUrl}/finalPostalCurrentAccount`);
+    return this.http.get<number>(`${this.baseUrl}/tutorials/finalPostalCurrentAccount`);
   }
 
   getTotalCash(): Observable<number> {
-    return this.http.get<number>(`${this.baseUrl}/totalCash`);
+    return this.http.get<number>(`${this.baseUrl}/tutorials/totalCash`);
   }
 
   getCurrencyCashOnCashier(): Observable<number> {
-    return this.http.get<number>(`${this.baseUrl}/currencyCashOnCashier`);
+    return this.http.get<number>(`${this.baseUrl}/tutorials/currencyCashOnCashier`);
   }
 
   getFinalBalanceLastMonth(): Observable<number> {
@@ -109,5 +110,18 @@ export class TutorialService {
 
   getStatesRepartitionLastRowLastRow(): Observable<number> {
     return this.http.get<number>(`${this.baseUrl}/tutorials/statesRepartitionLastRow`);
+  }
+
+  getStatesRepartitionLastRowLastRowByOrganismCode(organismCode: string): Observable<number> {
+    return this.http.get<number>(`${this.baseUrl}/tutorials/statesRepartitionLastRow`);
+
+  }
+
+  getCreditExpectedLastRowLastRow(): Observable<number> {
+    return this.http.get<number>(`${this.baseUrl}/tutorials/creditExpectedLastRow`);
+  }
+
+  getExpectedFlowLastRow(): Observable<number> {
+    return this.http.get<number>(`${this.baseUrl}/tutorials/expectedFlowLastRow`);
   }
 }
