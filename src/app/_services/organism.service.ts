@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Organism} from "../models/organism.model";
+import {environment} from "../../environments/environment";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -12,7 +13,7 @@ const httpOptions = {
 })
 export class OrganismService {
 
-  private baseUrl = 'http://localhost:8080/api/organisms';
+  private baseUrl = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -25,6 +26,6 @@ export class OrganismService {
   }
 
   createOrganism(organism: Organism): Observable<Organism> {
-    return this.http.post<Organism>(`${this.baseUrl}/create`, organism, httpOptions);
+    return this.http.post<Organism>(`${this.baseUrl}/organisms/create`, organism, httpOptions);
   }
 }
