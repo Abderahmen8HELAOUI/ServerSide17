@@ -1,0 +1,29 @@
+<div class="card card-container">
+  <h2>Create New Organism</h2>
+  <form (ngSubmit)="createOrganism()">
+    <div class="form-group">
+<!--      <label for="type">Type</label>-->
+<!--      <input type="text" -->
+<!--             id="type" -->
+<!--             class="form-control" [(ngModel)]="organism.type" -->
+<!--             name="type" required>-->
+      <label for="type">Choose a car:</label>
+      <hr>
+      <select id="type" name="type" [(ngModel)]="organism.type" required>
+        <option value="وزارة">وزارة</option>
+        <option value="إدارة عامة">إدارة عامة</option>
+        <option value="أمانة مال جهوية">أمانة مال جهوية</option>
+        <option value="قباضة مالية">قباضة مالية</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" class="form-control" [(ngModel)]="organism.name" name="name" required>
+    </div>
+    <div class="form-group">
+      <label for="code">Code</label>
+      <input type="text" id="code" class="form-control" [(ngModel)]="organism.code" name="code" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+  </form>
+</div>
