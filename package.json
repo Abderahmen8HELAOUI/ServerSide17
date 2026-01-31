@@ -2,7 +2,7 @@
   "name": "angular-a17-jwt-auth",
   "version": "0.0.0",
   "engines": {
-    "node": "20.9.0",
+    "node": ">=18 <19",
     "npm": "10.2.4"
   },
   "scripts": {
@@ -22,6 +22,7 @@
     "@angular/platform-browser": "^18.0.0",
     "@angular/platform-browser-dynamic": "^18.0.0",
     "@angular/router": "^18.0.0",
+    "@types/node": "^25.1.0",
     "express": "^4.19.2",
     "ngx-pagination": "^6.0.3",
     "ngx-toastr": "^19.0.0",
