@@ -45,8 +45,15 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+  isSubmitted: boolean = false;
 
   reloadPage(): void {
     window.location.reload();
+  }
+
+  hasDisplayableError(controlName: string): Boolean {
+    const control = this.form.get(controlName);
+    return Boolean(control?.invalid) &&
+      (this.isSubmitted || Boolean(control?.touched) || Boolean(control?.dirty))
   }
 }

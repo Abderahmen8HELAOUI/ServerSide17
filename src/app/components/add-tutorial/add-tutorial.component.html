@@ -28,12 +28,11 @@
       <div class="form-group">
         <label for="balancePreviousMonth">Solde Mois Précedent</label>
         <input
-          type="number"
+          type="text"
           class="form-control"
           id="balancePreviousMonth"
           required
           [(ngModel)]="tutorial.balancePreviousMonth "
-
           name="balancePreviousMonth"
         />
       </div>
@@ -41,7 +40,7 @@
       <div class="form-group">
         <label for="operationTreasuryAnterior">Opération Trésor Précédent</label>
         <input
-          type="number"
+          type="text"
           class="form-control"
           id="operationTreasuryAnterior"
           required
@@ -53,7 +52,7 @@
       <div class="form-group">
         <label for="operationTreasuryToday">Opération Trésor Courante</label>
         <input
-          type="number"
+          type="text"
           class="form-control"
           id="operationTreasuryToday"
           required
@@ -65,7 +64,7 @@
       <div class="form-group">
         <label for="operationPreviousRegulation">Opération Régulation Précédente</label>
         <input
-          type="number"
+          type="text"
           class="form-control"
           id="operationPreviousRegulation"
           required
@@ -77,7 +76,7 @@
       <div class="form-group">
         <label for="operationRegulationToday">Opération Régulation Courante</label>
         <input
-          type="number"
+          type="text"
           class="form-control"
           id="operationRegulationToday"
           required
@@ -89,7 +88,7 @@
       <div class="form-group">
         <label for="postCurrentAccount">CCP</label>
         <input
-          type="number"
+          type="text"
           class="form-control"
           id="postCurrentAccount"
           required
@@ -102,7 +101,7 @@
         <label for="creditExpected">Crédit Attendu</label>
         <input
           style="color: green"
-          type="number"
+          type="text"
           class="form-control"
           id="creditExpected"
           required
@@ -115,7 +114,7 @@
         <label for="rateExpected">Débit Attendu</label>
         <input
           style="color: red"
-          type="number"
+          type="text"
           class="form-control"
           id="rateExpected"
           required
@@ -127,7 +126,7 @@
       <div class="form-group">
         <label for="otherValues">Autres Valeurs</label>
         <input
-          type="number"
+          type="text"
           class="form-control"
           id="otherValues"
           required
@@ -139,7 +138,7 @@
       <div class="form-group">
         <label for="statesRepartition">États de Répartition</label>
         <input
-          type="number"
+          type="etxt"
           class="form-control"
           id="statesRepartition"
           required
@@ -151,7 +150,7 @@
       <div class="form-group">
         <label for="moneySpecies">Total Numéraire</label>
         <input
-          type="number"
+          type="text"
           class="form-control"
           id="moneySpecies"
           required
@@ -161,9 +160,22 @@
       </div>
 
       <div class="form-group">
+        <label for="organismId">providedMoneyOnCashier</label>
+        <input
+                type="etxt"
+                class="form-control"
+                id="providedMoneyOnCashier"
+                required
+                [(ngModel)]="tutorial.providedMoneyOnCashier"
+                name="organismId"
+        />
+      </div>
+
+
+      <div class="form-group">
         <label for="organismId">Code Organism</label>
         <input
-          type="number"
+          type="text"
           class="form-control"
           id="organismId"
           required

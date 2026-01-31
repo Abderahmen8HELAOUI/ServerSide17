@@ -1,5 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
+import {Organism} from "./organism.model";
+
 export interface Tutorial {
   balancePreviousMonth?: number;
   createDate?: string;
@@ -31,6 +33,7 @@ export interface Tutorial {
   totalOperationTreasury?: number;
   totalRecipeToday?: number;
   providedMoneyOnCashier?: number;
+  organism: Organism;
   surplus?: number;
   deficit?: number;
 }

@@ -1,5 +1,5 @@
-<div *ngIf="viewMode; else editable" class="col-md-25">
-    <div *ngIf="currentTutorial.id">
+@if (viewMode){
+    @if (currentTutorial.id){
         <h4>Opération Comptable</h4>
         <div>
             <label><strong>Date Opération:</strong></label>
@@ -9,17 +9,14 @@
             <label><strong>Recette Aujourd'hui:</strong></label>
             {{ currentTutorial.recipeToday |  currency:"دت ":"symbol":'6.3-3'}}
         </div>
-
         <div>
             <label><strong>Solde mois Précédent:</strong></label>
             {{ currentTutorial.balancePreviousMonth |  currency:"دت ":"symbol":'6.3-3'}}
         </div>
-
         <div>
             <label><strong>Total Recette Courante:</strong></label>
             <h4 style="color: green">{{ currentTutorial.totalRecipeToday |  currency:"دت ":"symbol":'6.3-3'}}</h4>
         </div>
-
         <div>
             <label><strong>Operation du Trésor Précédente:</strong></label>
             {{ currentTutorial.operationTreasuryAnterior |  currency:"دت ":"symbol":'6.3-3'}}
@@ -32,7 +29,6 @@
             <label><strong>Total Opérations du Trésor:</strong></label>
             <h4 style="color: blue">{{ currentTutorial.totalOperationTreasury |  currency:"دت ":"symbol":'6.3-3'}}</h4>
         </div>
-
         <div>
             <label><strong>Operation de Regulation Précédente:</strong></label>
             {{ currentTutorial.operationPreviousRegulation |  currency:"دت ":"symbol":'6.3-3'}}
@@ -45,17 +41,14 @@
             <label><strong>Total Opérations de Régulation :</strong></label>
             <h4 style="color: blue">{{ currentTutorial.totalOperationRegulation |  currency:"دت ":"symbol":'6.3-3'}}</h4>
         </div>
-
         <div>
             <label><strong>Total Dépenses:</strong></label>
             <h4 style="color: red">{{ currentTutorial.totalExpenses |  currency:"دت ":"symbol":'6.3-3'}}</h4>
         </div>
-
         <div>
             <label><strong>Solde Courant:</strong></label>
             <h4 style="color: green">{{ currentTutorial.finalBalanceToday |  currency:"دت ":"symbol":'6.3-3'}}</h4>
         </div>
-
         <div>
             <label><strong>Compte Courant Postal:</strong></label>
             {{ currentTutorial.postCurrentAccount |  currency:"دت ":"symbol":'6.3-3'}}
@@ -68,12 +61,10 @@
             <label><strong>Débit Attendu:</strong></label>
             {{ currentTutorial.rateExpected |  currency:"دت ":"symbol":'6.3-3'}}
         </div>
-
         <div>
             <label><strong>Compte Courant Postal Final:</strong></label>
             <h4 style="color: green">{{ currentTutorial.finalPostCurrentAccount |  currency:"دت ":"symbol":'6.3-3'}}</h4>
         </div>
-
         <div>
             <label><strong>Autres Valeurs:</strong></label>
             {{ currentTutorial.otherValues |  currency:"دت ":"symbol":'6.3-3'}}
@@ -82,233 +73,240 @@
             <label><strong>États de Répartition:</strong></label>
             {{ currentTutorial.statesRepartition |  currency:"دت ":"symbol":'6.3-3'}}
         </div>
-
         <div>
             <label><strong>Total Numéraire:</strong></label>
             <h4 style="color: green">{{ currentTutorial.totalCash |  currency:"دت ":"symbol":'6.3-3'}}</h4>
         </div>
-
         <div>
             <label><strong>Argents en Espèce:</strong></label>
             {{ currentTutorial.moneySpecies |  currency:"دت ":"symbol":'6.3-3'}}
         </div>
-
         <div>
             <label><strong>Argents en Espèce chez le Caissier:</strong></label>
             <h4 style="color: green">{{ currentTutorial.moneyOnCashier |  currency:"دت ":"symbol":'6.3-3'}}</h4>
         </div>
-
         <div>
             <label><strong>Code Organism:</strong></label>
-            {{ currentTutorial.organismCode }}
+            {{ currentTutorial.organism.code }}
+        </div>
+        <div>
+            <label><strong>État d'opération:</strong></label>
+            {{ currentTutorial.published ? "Validée" : "en Instance" }}
         </div>
 
         <div>
-            <label><strong>État d'opération:</strong></label>
-            {{ currentTutorial.published ? "Publié" : "en Instance" }}
+          <label><strong>provided Money On Cashier:</strong></label>
+          {{ currentTutorial.providedMoneyOnCashier | currency:"دت ":"symbol":'6.3-3'  }}
         </div>
+
+    <div *ngIf="currentTutorial.deficit && currentTutorial.deficit > 0">
+      <h4 style="color: red">❌ Déficit: {{ currentTutorial.deficit | currency:"دت ":"symbol":'6.3-3' }}</h4>
+    </div>
+
+    <div *ngIf="currentTutorial.surplus && currentTutorial.surplus > 0">
+      <h4 style="color: orange">⚠️ Excédent: {{ currentTutorial.surplus | currency:"دت ":"symbol":'6.3-3' }}</h4>
+    </div>
+
+    <div *ngIf="currentTutorial.deficit === 0 && currentTutorial.surplus === 0">
+      <h4 style="color: green">✅ Tout va bien, les montants correspondent.</h4>
+    </div>
+
 
         <a class="badge badge-warning" routerLink="/tutorials/{{ currentTutorial.id }}">
             Éditer
         </a>
-    </div>
-    <div *ngIf="!currentTutorial">
-        <br/>
-        <p>cliquer sur une Opération...</p>
-    </div>
-</div>
-
-<ng-template #editable>
-    <div *ngIf="currentTutorial.id" class="edit-form">
+    }
+    @else
+    {<p>Please click on a Tutorial...</p>}
+} @else {
+    @if (currentTutorial.id) {
+    <div class="edit-form">
         <h4>Opération Comptable</h4>
         <form>
             <div class="form-group">
                 <label for="title">Date Opération</label>
                 <input
-                        type="text"
+                        [(ngModel)]="currentTutorial.title"
                         class="form-control"
                         id="title"
-                        [(ngModel)]="currentTutorial.title"
                         name="title"
+                        type="text"
                 />
             </div>
             <div class="form-group">
                 <label for="recipeToday">Recette Courante</label>
                 <input
-                        type="text"
+                        [(ngModel)]="currentTutorial.recipeToday"
                         class="form-control"
                         id="recipeToday"
-                        [(ngModel)]="currentTutorial.recipeToday"
                         name="recipeToday"
+                        type="text"
                 />
             </div>
             <div class="form-group">
                 <label for="balancePreviousMonth">Solde Mois Précédent</label>
                 <input
-                        type="text"
+                        [(ngModel)]="currentTutorial.balancePreviousMonth"
                         class="form-control"
                         id="balancePreviousMonth"
-                        [(ngModel)]="currentTutorial.balancePreviousMonth"
                         name="balancePreviousMonth"
+                        type="text"
                 />
             </div>
             <div class="form-group">
                 <label for="operationTreasuryAnterior">Opération du Trésor Antérieure</label>
                 <input
-                        type="text"
+                        [(ngModel)]="currentTutorial.operationTreasuryAnterior"
                         class="form-control"
                         id="operationTreasuryAnterior"
-                        [(ngModel)]="currentTutorial.operationTreasuryAnterior"
                         name="operationTreasuryAnterior"
+                        type="text"
                 />
             </div>
             <div class="form-group">
                 <label for="operationTreasuryToday">Opération du Trésor Courante</label>
                 <input
-                        type="text"
+                        [(ngModel)]="currentTutorial.operationTreasuryToday"
                         class="form-control"
                         id="operationTreasuryToday"
-                        [(ngModel)]="currentTutorial.operationTreasuryToday"
                         name="operationTreasuryToday"
+                        type="text"
                 />
             </div>
             <div class="form-group">
                 <label for="operationPreviousRegulation">Opération de Régulation Antérieure</label>
                 <input
-                        type="text"
+                        [(ngModel)]="currentTutorial.operationPreviousRegulation"
                         class="form-control"
                         id="operationPreviousRegulation"
-                        [(ngModel)]="currentTutorial.operationPreviousRegulation"
                         name="operationPreviousRegulation"
+                        type="text"
                 />
             </div>
             <div class="form-group">
                 <label for="operationRegulationToday">Opération de Regulation Courante</label>
                 <input
-                        type="text"
+                        [(ngModel)]="currentTutorial.operationRegulationToday"
                         class="form-control"
                         id="operationRegulationToday"
-                        [(ngModel)]="currentTutorial.operationRegulationToday"
                         name="operationRegulationToday"
+                        type="text"
                 />
             </div>
             <div class="form-group">
                 <label for="postCurrentAccount">Compte Courant Postal</label>
                 <input
-                        type="text"
+                        [(ngModel)]="currentTutorial.postCurrentAccount"
                         class="form-control"
                         id="postCurrentAccount"
-                        [(ngModel)]="currentTutorial.postCurrentAccount"
                         name="postCurrentAccount"
+                        type="text"
                 />
             </div>
             <div class="form-group">
                 <label for="creditExpected">Crédit Attendu</label>
                 <input
-                        type="text"
+                        [(ngModel)]="currentTutorial.creditExpected"
                         class="form-control"
                         id="creditExpected"
-                        [(ngModel)]="currentTutorial.creditExpected"
                         name="creditExpected"
+                        type="text"
                 />
             </div>
 
             <div class="form-group">
                 <label for="rateExpected">Débit Attendu</label>
                 <input
-                        type="text"
+                        [(ngModel)]="currentTutorial.rateExpected"
                         class="form-control"
                         id="rateExpected"
-                        [(ngModel)]="currentTutorial.rateExpected"
                         name="rateExpected"
+                        type="text"
                 />
             </div>
             <div class="form-group">
                 <label for="otherValues">Autres Valeurs</label>
                 <input
-                        type="text"
+                        [(ngModel)]="currentTutorial.otherValues"
                         class="form-control"
                         id="otherValues"
-                        [(ngModel)]="currentTutorial.otherValues"
                         name="otherValues"
+                        type="text"
                 />
             </div>
             <div class="form-group">
                 <label for="statesRepartition">Etats de Répartition</label>
                 <input
-                        type="text"
+                        [(ngModel)]="currentTutorial.statesRepartition"
                         class="form-control"
                         id="statesRepartition"
-                        [(ngModel)]="currentTutorial.statesRepartition"
                         name="statesRepartition"
+                        type="text"
                 />
             </div>
             <div class="form-group">
                 <label for="moneySpecies">Argents en Espèce:</label>
                 <input
-                        type="text"
+                        [(ngModel)]="currentTutorial.moneySpecies"
                         class="form-control"
                         id="moneySpecies"
-                        [(ngModel)]="currentTutorial.moneySpecies"
                         name="moneySpecies"
+                        type="text"
                 />
             </div>
             <div class="form-group">
                 <label for="organismId">Organism Code</label>
                 <input
-                        type="text"
+                        [(ngModel)]="currentTutorial.organismCode"
                         class="form-control"
                         id="organismId"
-                        [(ngModel)]="currentTutorial.organismCode"
                         name="organismId"
+                        type="text"
                 />
             </div>
 
             <div class="form-group">
                 <label for="description">Description</label>
                 <input
-                        type="text"
+                        [(ngModel)]="currentTutorial.description"
                         class="form-control"
                         id="description"
-                        [(ngModel)]="currentTutorial.description"
                         name="description"
+                        type="text"
                 />
             </div>
 
             <div class="form-group">
                 <label><strong>État d'opération:</strong></label>
-                {{ currentTutorial.published ? "Publie" : "en Instance" }}
+                {{ currentTutorial.published ? "Validée" : "en Instance" }}
             </div>
         </form>
-
-
+        @if (currentTutorial.published) {
         <button class="badge badge-primary mr-2"
-                (click)="updatePublished(false)">
-            Ne Pas Publier
+          (click)="updatePublished(false)" >
+          ne pas valider
+        </button>
+        }
+        @else
+            {
+                <button class="badge badge-primary mr-2" (click)="updatePublished(true)">
+                  Valider
+                </button>
+            }
+
+        <button (click)="deleteTutorial()" class="badge badge-danger mr-2">
+            Delete
         </button>
 
         <button
-                *ngIf="!currentTutorial.published"
-                class="badge badge-primary mr-2" (click)="updatePublished(true)">
-            Publier
-        </button>
-
-
-        <button class="badge badge-danger mr-2" (click)="deleteTutorial()">
-            Supprimer
-        </button>
-
-        <button
-                type="submit"
+                (click)="updateTutorial()"
                 class="badge badge-success mb-2"
-                (click)="updateTutorial()">
-            Mettre à Jour
+                type="submit">
+            Update
         </button>
         <p>{{ message }}</p>
-        <div class="alert alert-success">{{ message }}</div>
-        <div *ngIf="!currentTutorial.id">
-            <br/>
-            <p>Cannot access this Tutorial...</p>
-        </div>
     </div>
-</ng-template>
+    }
+    @else
+    {<p>Cannot access this Tutorial...</p>}
+}

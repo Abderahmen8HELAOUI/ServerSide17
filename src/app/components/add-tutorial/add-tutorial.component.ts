@@ -5,6 +5,7 @@ import {TutorialService} from "../../_services/tutorial.service";
 import {OrganismService} from "../../_services/organism.service";
 import {StorageService} from "../../_services/storage.service";
 import {ToastrService} from "ngx-toastr";
+import {Organism} from "../../models/organism.model";
 
 @Component({
   selector: 'app-add-tutorial',
@@ -28,10 +29,19 @@ export class AddTutorialComponent implements OnInit {
     statesRepartition: 0,
     moneySpecies: 0,
     description: '',
-    published: false
+    published: false,
+    providedMoneyOnCashier: 0,
+    surplus: 0,
+    deficit: 0,
+      organism: new Organism()
   };
   submitted = false;
   organismCode: string;
+
+  comparisonMessage: string = '';
+  comparisonClass: string = '';
+  differenceAmount: number = 0;
+
 
   constructor(
     private tutorialService: TutorialService,
@@ -127,7 +137,9 @@ export class AddTutorialComponent implements OnInit {
       otherValues: this.tutorial.otherValues,
       statesRepartition: this.tutorial.statesRepartition,
       moneySpecies: this.tutorial.moneySpecies,
-      description: this.tutorial.description
+      description: this.tutorial.description,
+      providedMoneyOnCashier: this.tutorial.providedMoneyOnCashier,
+        organism: this.tutorial.organism
     };
     if (confirm('Are you sure to add this record?'))
     this.tutorialService.createTutorialByOrganismCode(this.organismCode, data).subscribe({
@@ -136,6 +148,9 @@ export class AddTutorialComponent implements OnInit {
         this.submitted = true;
         this.toastr.success('Inserted successfully', 'Application Livre de Caisse')
         this.router.navigate(['/tutorials']);
+
+
+
       },
       error: (e) => console.error(e)
     });
@@ -158,7 +173,8 @@ export class AddTutorialComponent implements OnInit {
       statesRepartition: 0,
       moneySpecies: 0,
       description: '',
-      published: false
+      published: false,
+      organism: new Organism()
     };
   }
 }

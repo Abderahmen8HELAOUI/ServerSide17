@@ -1,1 +1,32 @@
-<p>organism-list works!</p>
+<div class="container">
+  <h2>Biological Organisms Inventory</h2>
+
+  <div class="table-container">
+    <table class="styled-table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Common Name</th>
+        <th>Scientific Species</th>
+        <th>Habitat</th>
+        <th>Conservation Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let org of organisms">
+        <td>{{ org.id }}</td>
+        <td><strong>{{ org.name }}</strong></td>
+        <td><em>{{ org.code }}</em></td>
+        <td>{{ org.type }}</td>
+
+      </tr>
+      <tr *ngIf="isLoading">
+        <td colspan="5" class="loading">Loading data...</td>
+      </tr>
+      <tr *ngIf="!isLoading && organisms.length === 0">
+        <td colspan="5" class="loading">No organisms found.</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -45,7 +45,7 @@ export class TutorialService {
   }
 
   delete(id: any): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`);
+    return this.http.delete(`${this.baseUrl}/tutorials/${id}`);
   }
 
   deleteAll(): Observable<any> {

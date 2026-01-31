@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Tutorial} from "../../models/tutorial";
 import {TutorialService} from "../../_services/tutorial.service";
 import {StorageService} from "../../_services/storage.service";
+import {Organism} from "../../models/organism.model";
 
 @Component({
   selector: 'app-tutorials-list',
@@ -11,7 +12,7 @@ import {StorageService} from "../../_services/storage.service";
 export class TutorialsListComponent  implements OnInit {
 
   tutorials: Tutorial[] = [];
-  currentTutorial: Tutorial = {};
+  currentTutorial: Tutorial = {organism: new Organism};
   currentIndex = -1;
   title = '';
 
@@ -83,7 +84,7 @@ export class TutorialsListComponent  implements OnInit {
 
   refreshList(): void {
     this.retrieveTutorials();
-    this.currentTutorial = {};
+    this.currentTutorial = {organism: new Organism()};
     this.currentIndex = -1;
   }
 

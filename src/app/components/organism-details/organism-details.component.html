@@ -1,1 +1,67 @@
-<p>organism-details works!</p>
+@if (viewMode){
+    @if (currentOrganism.id){
+    <h4>Tutorial</h4>
+    <div>
+        <label><strong>Title:</strong></label> {{ currentOrganism.type }}
+    </div>
+    <div>
+        <label><strong>Description:</strong></label>
+        {{ currentOrganism.name }}
+    </div>
+    <div>
+        <label><strong>Status:</strong></label>
+        {{ currentOrganism.code }}
+    </div>
+
+    <a class="badge badge-warning" routerLink="/tutorials/{{ currentOrganism.id }}">
+        Edit
+    </a>
+    } @else {<p>Please click on a Tutorial...</p>}
+            } @else {
+    @if (currentOrganism.id) {
+    <div class="edit-form">
+        <h4>Tutorial</h4>
+        <form>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input
+                        type="text"
+                        class="form-control"
+                        id="title"
+                        [(ngModel)]="currentOrganism.type"
+                        name="title"
+                />
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input
+                        type="text"
+                        class="form-control"
+                        id="description"
+                        [(ngModel)]="currentOrganism.name"
+                        name="description"
+                />
+            </div>
+
+            <div class="form-group">
+                <label><strong>Status:</strong></label>
+                {{ currentOrganism.code }}
+            </div>
+        </form>
+
+
+
+        <button class="badge badge-danger mr-2" >
+            Delete
+        </button>
+
+        <button
+                type="submit"
+                class="badge badge-success mb-2"
+                >
+            Update
+        </button>
+        <p>{{ message }}</p>
+    </div>
+    } @else {<p>Cannot access this Tutorial...</p>}
+}

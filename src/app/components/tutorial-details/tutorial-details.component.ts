@@ -1,8 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, TemplateRef} from '@angular/core';
 import {Tutorial} from "../../models/tutorial";
 import {TutorialService} from "../../_services/tutorial.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
+import {Organism} from "../../models/organism.model";
+import {catchError, of, tap} from "rxjs";
 
 @Component({
   selector: 'app-tutorial-details',
@@ -11,6 +13,9 @@ import {ToastrService} from "ngx-toastr";
 })
 export class TutorialDetailsComponent implements OnInit {
   @Input() viewMode = false;
+
+
+  editable!: TemplateRef<any>;
 
   @Input() currentTutorial: Tutorial = {
     title: '',
@@ -47,13 +52,18 @@ export class TutorialDetailsComponent implements OnInit {
     surplus: 0,
     deficit: 0,
 
-    organismCode: '',
+    organism: new Organism,
     description: '',
     published: false
   };
 
   message = '';
   extractedDate: string = '';
+
+
+  comparisonMessage: string = '';
+  comparisonClass: string = '';
+  differenceAmount: number = 0;
 
 
   totalRecipeToday: number =0;
@@ -84,17 +94,13 @@ export class TutorialDetailsComponent implements OnInit {
     this.loadFinalPostalCurrentAccount();
     this.loadTotalCash();
     this.loadCurrencyCashOnCashier();
+
   }
 
-  extractAndDisplayDate(title: any): string {
-    // Extract date substring from title (assuming it's always at the end)
-    const dateSubstring = title.slice(-10);
-    // Format and return the extracted date
-    return `Operation Date is: ${dateSubstring}`;
-  }
   getTutorial(id: string): void {
     this.tutorialService.get(id).subscribe({
       next: (data) => {
+        console.log('Code Organisme:', data.organism.code);
         this.currentTutorial = data;
         console.log(data);
       },
@@ -156,14 +162,16 @@ export class TutorialDetailsComponent implements OnInit {
 
   loadTotalRecipe(): void {
     this.tutorialService.getTotalRecipe()
-        .subscribe((totalRecipe) => {
-          this.totalRecipeToday = totalRecipe;
-        },(error) => {
+      .pipe(
+        tap(totalRecipe => this.totalRecipeToday = totalRecipe),
+        catchError(error => {
           console.error('Error fetching total recipe:', error);
-          // Return an observable with a fallback value if necessary
-
-        });
+          return of(0); // Provide a fallback value
+        })
+      )
+      .subscribe();
   }
+
   loadTotalTreasuryOperations(): void {
     this.tutorialService.getTotalTreasuryOperations()
         .subscribe((totalTreasuryOperations) => {
