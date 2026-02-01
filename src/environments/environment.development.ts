@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl:'https://applicationlivredecaisseserverside.onrender.com/api'
+  baseUrl:'http://localhost:8080/api'
 };

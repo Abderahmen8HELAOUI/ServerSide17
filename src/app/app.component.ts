@@ -27,7 +27,7 @@ export class AppComponent {
   ) {}
 
   ngOnInit(): void {
-    this.isLoggedIn = this.storageService.isLoggedIn();
+    this.isLoggedIn = !!this.storageService.getToken();
 
     if (this.isLoggedIn) {
       const user = this.storageService.getUser();
@@ -39,14 +39,10 @@ export class AppComponent {
       this.username = user.username;
     }
 
-    // this.eventBusSub = this.eventBusService.on('logout', () => {
-    //   this.logout();
-    // });
   }
 
   logout(): void {
-
-        this.storageService.clean();
+    this.storageService.signOut();
     window.location.reload();
   }
 }

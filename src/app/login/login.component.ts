@@ -17,13 +17,12 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
 
-  constructor(private authService: AuthService,
-              private storageService: StorageService) { }
+  constructor(private authService: AuthService, private tokenStorage: StorageService) { }
 
   ngOnInit(): void {
-    if (this.storageService.isLoggedIn()) {
+    if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
-      this.roles = this.storageService.getUser().roles;
+      this.roles = this.tokenStorage.getUser().roles;
     }
   }
 
@@ -32,11 +31,12 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(username, password).subscribe({
       next: data => {
-        this.storageService.saveUser(data);
+        this.tokenStorage.saveToken(data.token);
+        this.tokenStorage.saveUser(data);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.roles = this.storageService.getUser().roles;
+        this.roles = this.tokenStorage.getUser().roles;
         this.reloadPage();
       },
       error: err => {
@@ -45,15 +45,9 @@ export class LoginComponent implements OnInit {
       }
     });
   }
-  isSubmitted: boolean = false;
 
   reloadPage(): void {
     window.location.reload();
   }
 
-  hasDisplayableError(controlName: string): Boolean {
-    const control = this.form.get(controlName);
-    return Boolean(control?.invalid) &&
-      (this.isSubmitted || Boolean(control?.touched) || Boolean(control?.dirty))
-  }
 }

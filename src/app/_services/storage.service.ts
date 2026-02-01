@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 const USER_KEY = 'auth-user';
+const TOKEN_KEY = 'auth-token';
 
 
 @Injectable({
@@ -8,10 +9,19 @@ const USER_KEY = 'auth-user';
 })
 export class StorageService {
     private organismCodeKey = 'organism-code';
-  constructor() {}
+  constructor() { }
 
-  clean(): void {
+  signOut(): void {
     window.sessionStorage.clear();
+  }
+
+  public saveToken(token: string): void {
+    window.sessionStorage.removeItem(TOKEN_KEY);
+    window.sessionStorage.setItem(TOKEN_KEY, token);
+  }
+
+  public getToken(): string | null {
+    return window.sessionStorage.getItem(TOKEN_KEY);
   }
 
   public saveUser(user: any): void {
@@ -25,16 +35,7 @@ export class StorageService {
       return JSON.parse(user);
     }
 
-    return null;
-  }
-
-  public isLoggedIn(): boolean {
-    const user = window.sessionStorage.getItem(USER_KEY);
-    if (user) {
-      return true;
-    }
-
-    return false;
+    return {};
   }
 
   setOrganismCode(organismCode: string) {
