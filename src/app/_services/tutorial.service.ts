@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {Tutorial} from "../models/tutorial";
 import {Router} from "@angular/router";
 import {environment} from "../../environments/environment";
+import {EmailRequest} from "../models/email-request";
 
 @Injectable({
   providedIn: 'root'
@@ -123,5 +124,13 @@ export class TutorialService {
 
   getExpectedFlowLastRow(): Observable<number> {
     return this.http.get<number>(`${this.baseUrl}/tutorials/expectedFlowLastRow`);
+  }
+
+  sendTutorialByEmail(request: { email: string; tutorialId: number | undefined }): Observable<any> {
+    return this.http.post(
+      `${this.baseUrl}/tutorials/send-email`,
+      request,
+      { responseType: 'text' } // car ton backend renvoie un message texte
+    );
   }
 }

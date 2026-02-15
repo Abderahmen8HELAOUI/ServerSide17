@@ -27,17 +27,17 @@ export class AuthService {
     );
   }
 
-  register(username: string, email: string, password: string): Observable<any> {
-    return this.http.post(
-      this.baseUrl + '/auth/signup',
-      {
-        username,
-        email,
-        password,
-      },
-      httpOptions
-    );
-  }
+  // register(username: string, email: string, password: string): Observable<any> {
+  //   return this.http.post(
+  //     this.baseUrl + '/auth/signup',
+  //     {
+  //       username,
+  //       email,
+  //       password,
+  //     },
+  //     httpOptions
+  //   );
+  // }
 
   registerUser(organismId: string, signupRequest: any): Observable<any> {
     return this.http.post(this.baseUrl + '/auth/signup/' + organismId + '/organism', signupRequest, {

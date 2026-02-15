@@ -3,6 +3,7 @@ import {Tutorial} from "../../models/tutorial";
 import {TutorialService} from "../../_services/tutorial.service";
 import {StorageService} from "../../_services/storage.service";
 import {Organism} from "../../models/organism.model";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-tutorials-list',
@@ -22,8 +23,11 @@ export class TutorialsListComponent  implements OnInit {
   pageSizes = [3, 6, 9];
   organismCode: string;
 
+  email: string = '';
+
   constructor(private tutorialService: TutorialService,
-              private storageService: StorageService) {
+              private storageService: StorageService,
+              private toastr: ToastrService) {
     this.organismCode = this.storageService.getOrganismCode() || '';
   }
 
@@ -35,6 +39,32 @@ export class TutorialsListComponent  implements OnInit {
 
     this.retrieveTutorials();
   }
+
+  ///////////////////////
+  sendByEmail(tutorialId: number | undefined): void {
+    if (!this.email) {
+      this.toastr.error('Veuillez saisir un email');
+      return;
+    }
+
+    const request = {
+      email: this.email,
+      tutorialId: tutorialId
+    };
+
+    this.tutorialService.sendTutorialByEmail(request).subscribe({
+      next: (res) => {
+        this.toastr.success(res);
+        this.email = '';
+      },
+      error: (err) => {
+        console.error(err);
+        this.toastr.error('Erreur lors de l’envoi de l’email');
+      }
+    });
+  }
+
+  ///////////////////////
 
   getRequestParams(searchTitle: string, page: number, pageSize: number): any {
     let params: any = {};

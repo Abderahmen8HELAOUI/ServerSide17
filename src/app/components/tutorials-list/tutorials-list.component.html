@@ -56,7 +56,22 @@
         ></app-tutorial-details>
     </div>
 
-    <div class="mt-3">
+  <input
+    type="email"
+    class="form-control mb-2"
+    placeholder="Email du destinataire"
+    [(ngModel)]="email"
+  />
+
+  <button
+    class="m-3 btn btn-sm btn-primary"
+    (click)="sendByEmail(currentTutorial.id)"
+  >
+    📧 Envoyer par email
+  </button>
+
+
+  <div class="mt-3">
         <button class="m-3 btn btn-sm btn-danger" (click)="removeAllTutorials()">
             Supprimer Tous
         </button>
