@@ -4,7 +4,7 @@ import {Observable} from "rxjs";
 import {Tutorial} from "../models/tutorial";
 import {Router} from "@angular/router";
 import {environment} from "../../environments/environment";
-import {EmailRequest} from "../models/email-request";
+
 
 @Injectable({
   providedIn: 'root'
